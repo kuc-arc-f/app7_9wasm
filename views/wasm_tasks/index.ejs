@@ -1,40 +1,28 @@
 <div id="app">
     <h1> WasmTasks - index</h1>
     <hr />
-    <ul v-for="task in tasks" v-bind:key="task._id">
-        <li>{{ task.title }} / id: {{ task.id }}
-            <p>{{ task.content }}</p>
-            <a v-bind:href="'/tasks/show/' + task.id">[show]</a><br />
-            <a v-bind:href="'/tasks/edit/' + task.id">[edit]</a><br />
-        </li>
-    </ul>    
+    <div id="div_post_wrap">
+    </div>    
 </div>
 
 <!-- -->
 <script>
+
 new Vue({
     el: '#app',
     created () {
         this.getTasks();
-        console.log("#tasks.index");
     },    
     data: {
-        msg : "aa-1234",
         tasks: [],
     },
     methods: {
         getTasks () {
-            axios.get("/api/tasks_index").then(res =>  {
-//                console.log(res.data.docs);
-                var items = res.data.docs
-                var arr =[];
-                items.forEach( function (item) {
-                    item.url ="/tasks/show/" + item._id,
-                    arr.push(item)
-                });      
-                this.tasks = arr;
-                console.log( this.tasks );
-            })        
+            axios.get("/wasm_tasks/api_test").then(res =>  {
+//console.log(res.data );
+                var parent = window.document.getElementById('div_post_wrap');
+                parent.innerHTML = res.data;
+            })            
         }
     }
 
