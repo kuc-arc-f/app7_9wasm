@@ -1,0 +1,30 @@
+<div id="app">
+    <h1> WasmTasks - Test</h1>
+    <hr />
+    <div id="div_post_wrap">
+    </div>    
+</div>
+
+<!-- -->
+<script>
+
+new Vue({
+    el: '#app',
+    created () {
+        this.getTasks();
+    },    
+    data: {
+        tasks: [],
+    },
+    methods: {
+        getTasks () {
+            axios.get("/wasm_tasks/api_test").then(res =>  {
+//console.log(res.data );
+                var parent = window.document.getElementById('div_post_wrap');
+                parent.innerHTML = res.data;
+            })            
+        }
+    }
+
+});
+</script>
